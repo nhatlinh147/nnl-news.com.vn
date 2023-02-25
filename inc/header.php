@@ -6,8 +6,12 @@
                <ul class="top_nav">
                   <li><a href="<?php echo General::view_link("trang-chu.html", true) ?>">Home</a></li>
                   <li><a href="<?php echo General::view_link("gioi-thieu.html", true) ?>">About</a></li>
-                  <li><a href="<?php echo General::view_link("dang-nhap.html", true) ?>">Sign In</a></li>
                   <li><a href="<?php echo General::view_link("lien-he.html", true) ?>">Contact</a></li>
+                  <li><a href="<?php echo General::view_link("dang-nhap.html", true) ?>">Sign In</a></li>
+                  <li>
+                     <image src="<?php echo General::view_link("dang-nhap.html", true) ?>">
+                        User_Name
+                  </li>
                </ul>
             </div>
             <div class="header_top_right">
