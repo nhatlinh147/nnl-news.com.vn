@@ -1,0 +1,2 @@
+// thêm AUTO_INCREMENT cho khóa chính
+ALTER TABLE tbl_account MODIFY COLUMN Account_ID INT AUTO_INCREMENT;

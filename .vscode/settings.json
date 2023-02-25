@@ -1,0 +1,27 @@
+{
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "eslint.codeActionsOnSave.rules": null,
+    "editor.tabSize": 3,
+    "prettier.useTabs": true,
+    "editor.stickyTabStops": false,
+    "editor.snippetSuggestions": "top",
+    "emmet.showSuggestionsAsSnippets": true,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.indentSize": "tabSize",
+
+    // START Khắc phục lỗi intelephense(1009) trong vscode
+    "intelephense.telemetry.enabled": false,
+    "intelephense.completion.triggerParameterHints": true,
+    "intelephense.completion.insertUseDeclaration": true,
+    "intelephense.trace.server": "messages",
+    "intelephense.diagnostics.undefinedClassConstants": false,
+    "intelephense.diagnostics.undefinedFunctions": false,
+    "intelephense.diagnostics.undefinedConstants": false,
+    "intelephense.diagnostics.undefinedProperties": false,
+    "intelephense.diagnostics.undefinedTypes": false,
+    "intelephense.diagnostics.undefinedMethods": false,
+    "workbench.tree.indent": 8,
+    "editor.wrappingIndent": "same",
+    // END
+}
