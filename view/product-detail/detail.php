@@ -17,7 +17,11 @@ $prev_pro = $detail->next_prev($show_detail['Product_ID'], 'prev');
 $prev_pro = empty($prev_pro) ? null : $product->getproductbyId($prev_pro)->fetch_assoc();
 
 $detail->update_view($show_detail['Product_Slug'], $show_detail['Product_View']);
+<<<<<<< HEAD
 echo (bool) 1;
+=======
+
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
 ?>
 
 <?php Path::path_file_include('Header_resource') ?>
@@ -47,16 +51,26 @@ echo (bool) 1;
                         if ($result) {
                            $result = General::getArrayFetchAssoc($result)[0];
                         ?>
+<<<<<<< HEAD
                         <!-- Category parent -->
                         <li><a
                               href="<?php echo linkCategory($result['Cate_Pro_Slug']) ?>"><?php echo $result['Cate_Pro_Name'] ?></a>
                         </li>
+=======
+                           <!-- Category parent -->
+                           <li><a href="<?php echo linkCategory($result['Cate_Pro_Slug']) ?>"><?php echo $result['Cate_Pro_Name'] ?></a>
+                           </li>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
 
                         <?php } ?>
 
                         <!-- Category child -->
+<<<<<<< HEAD
                         <li><a
                               href="<?php echo linkCategory($show_detail['Cate_Pro_Slug']) ?>"><?php echo $show_detail['Cate_Pro_Name'] ?></a>
+=======
+                        <li><a href="<?php echo linkCategory($show_detail['Cate_Pro_Slug']) ?>"><?php echo $show_detail['Cate_Pro_Name'] ?></a>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                         </li>
 
                         <!-- Product -->
@@ -66,8 +80,12 @@ echo (bool) 1;
                      <div class="single_page_content">
                         <div class="post_commentbox">
                            <a href="#"><i class="fa fa-user"></i><?php echo $show_detail['Product_UserName'] ?></a>
+<<<<<<< HEAD
                            <span><i
                                  class="fa fa-calendar"></i><?php echo product_date($show_detail['created_at']); ?></span>
+=======
+                           <span><i class="fa fa-calendar"></i><?php echo product_date($show_detail['created_at']); ?></span>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                            <a href="#"><i class="fa fa-tags"></i><?php echo $show_detail['Cate_Pro_Name'] ?></a>
                            <span><i class="fa fa-eye"></i><?php echo $show_detail['Product_View']; ?></span>
                         </div>
@@ -87,16 +105,24 @@ echo (bool) 1;
 
                   <?php if ($prev_pro) {
                      $link = General::view_link("xem-tin-tuc/" . $prev_pro['Product_Slug'], true); ?>
+<<<<<<< HEAD
                   <div class="prev"> <a class="angle_left" href="<?php echo $link  ?>"><i
                            class="fa fa-angle-double-left"></i></a>
                      <div class="pagincontent"> <span>Previous Post</span> <a href="<?php echo $link  ?>"
                            style="font-size: 13px;"><?php echo General::limitContent($prev_pro['Product_Name'], 13) ?></a>
                      </div>
                   </div>
+=======
+                     <div class="prev"> <a class="angle_left" href="<?php echo $link  ?>"><i class="fa fa-angle-double-left"></i></a>
+                        <div class="pagincontent"> <span>Previous Post</span> <a href="<?php echo $link  ?>" style="font-size: 13px;"><?php echo General::limitContent($prev_pro['Product_Name'], 13) ?></a>
+                        </div>
+                     </div>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                   <?php } ?>
 
                   <?php if ($next_pro) {
                      $link = General::view_link("xem-tin-tuc/" . $next_pro['Product_Slug'], true); ?>
+<<<<<<< HEAD
                   <div class="next">
                      <div class="pagincontent"> <span>Next Post</span> <a href="<?php echo $link ?>"
                            style="font-size: 13px;"><?php echo General::limitContent($next_pro['Product_Name'], 13) ?></a>
@@ -119,6 +145,24 @@ echo (bool) 1;
                      width: 100%;
                      margin-bottom: 15px;
                   }
+=======
+                     <div class="next">
+                        <div class="pagincontent"> <span>Next Post</span> <a href="<?php echo $link ?>" style="font-size: 13px;"><?php echo General::limitContent($next_pro['Product_Name'], 13) ?></a>
+                        </div>
+                        <a class="angle_right" href="<?php echo $link ?>"><i class="fa fa-angle-double-right"></i></a>
+                     </div>
+                  <?php } ?>
+
+               </div>
+               <div class="share_post"> <a class="facebook" href="#"><i class="fa fa-facebook"></i>Facebook</a> <a class="twitter" href="#"><i class="fa fa-twitter"></i>Twitter</a> <a class="googleplus" href="#"><i class="fa fa-google-plus"></i>Google+</a> <a class="linkedin" href="#"><i class="fa fa-linkedin"></i>LinkedIn</a> <a class="stumbleupon" href="#"><i class="fa fa-stumbleupon"></i>StumbleUpon</a> <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>Pinterest</a> </div>
+               <div class="similar_post">
+                  <h2>Similar Post You May Like <i class="fa fa-thumbs-o-up"></i></h2>
+                  <style>
+                     div.content_bottom ul.small_catg.similar_nav li a.media-left {
+                        width: 100%;
+                        margin-bottom: 15px;
+                     }
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                   </style>
                   <ul class="small_catg similar_nav wow fadeInDown animated">
 
@@ -126,6 +170,7 @@ echo (bool) 1;
                </div>
 
                <!-- START comment -->
+<<<<<<< HEAD
 
                <div class="similar_post">
                   <h2>Bình luận</h2>
@@ -133,6 +178,12 @@ echo (bool) 1;
                      <img class="rounded-circle shadow-1-strong me-3"
                         src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40"
                         height="40" />
+=======
+               <div class="similar_post">
+                  <h2>Bình luận</h2>
+                  <div class="d-flex flex-start w-100">
+                     <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40" height="40" />
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                      <div class="form-outline w-100">
                         <textarea class="form-control" id="comment_news" rows="4" style="background: #fff;"></textarea>
 
@@ -143,6 +194,7 @@ echo (bool) 1;
                      <button type="button" class="btn btn-outline-primary btn-sm" id="Cancel_Comment">Cancel</button>
                   </div>
                </div>
+<<<<<<< HEAD
 
                <!-- END -->
 
@@ -153,6 +205,8 @@ echo (bool) 1;
                      <div id="comments-container"></div>
                   </div>
                </div>
+=======
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                <!-- END -->
 
             </div>
@@ -173,6 +227,7 @@ echo (bool) 1;
    <?php Path::path_file_include('Script_resource') ?>
    <!-- END -->
 
+<<<<<<< HEAD
    <!-- Custom js comment -->
    <script src="<?php echo Path::path_file("Assets_js_custom_comment") ?>"></script>
    <!-- END -->
@@ -256,6 +311,15 @@ echo (bool) 1;
          },
       });
    }
+=======
+   <!-- Tập hợp file js -->
+   <script src="<?php echo Path::path_file("Assets_js_custom_comment") ?>"></script>
+   <!-- END -->
+
+   <script>
+      $('ul.similar_nav').html(
+         `<?php echo $detail->getSimilarPost($show_detail['Cate_Pro_ID'], $show_detail['Product_Slug']); ?>`);
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
    </script>
 </body>
 

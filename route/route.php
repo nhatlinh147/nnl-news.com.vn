@@ -62,7 +62,10 @@ $routes_user = [
 	"xem-tin-tuc/(.+)" => "product-detail/detail.php?product_slug=$1",
 	"danh-muc/(.+)" => "category/category-main.php?category_slug=$1",
 	"lien-he" => "contact/contact.php",
+<<<<<<< HEAD
 	"dang-nhap" => "login/sign-in.php",
+=======
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
 	"gui-mail-lien-he" => "contact/letter-contact.php",
 ];
 

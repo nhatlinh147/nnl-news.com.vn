@@ -1,6 +1,11 @@
 <?php
 Path::path_file_include('User_detail', 'Autoload');
 include Path::path_file_local('Global');
+<<<<<<< HEAD
+=======
+$string = "aaaaaaaaaa";
+print_r($string);
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
 ?>
 
 <?php Path::path_file_include('Header_resource') ?>
@@ -32,11 +37,21 @@ include Path::path_file_local('Global');
                            $image_name = pathinfo($result['Slide_Image'])['filename'];
                         ?>
 
+<<<<<<< HEAD
                            <div class="single_iteam"><img src="<?php echo Path::path_file("Upload_slide_$image_name") ?>" alt="">
                               <h2><a class="slider_tittle" href="#<?php echo $result['Slide_Slug'] ?>"><?php echo $result['Slide_Title'] ?></a>
                               </h2>
                               <h4><?php echo $result['Slide_Desc'] ?></h4>
                            </div>
+=======
+                        <div class="single_iteam"><img src="<?php echo Path::path_file("Upload_slide_$image_name") ?>"
+                              alt="">
+                           <h2><a class="slider_tittle"
+                                 href="#<?php echo $result['Slide_Slug'] ?>"><?php echo $result['Slide_Title'] ?></a>
+                           </h2>
+                           <h4><?php echo $result['Slide_Desc'] ?></h4>
+                        </div>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
 
                         <?php
                         }
@@ -72,7 +87,12 @@ include Path::path_file_local('Global');
             <div class="col-lg-3 col-md-3 col-sm-3">
                <div class="content_middle_leftbar">
                   <div class="single_category wow fadeInDown">
+<<<<<<< HEAD
                      <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a href="#" class="title_text"><?php echo $leftbar[0]["Cate_Pro_Name"]; ?></a> </h2>
+=======
+                     <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a href="#"
+                           class="title_text"><?php echo $leftbar[0]["Cate_Pro_Name"]; ?></a> </h2>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
 
                      <ul class="catg1_nav">
                         <?php
@@ -116,7 +136,12 @@ include Path::path_file_local('Global');
                <div class="content_middle_rightbar">
                   <div class="single_category wow fadeInDown">
 
+<<<<<<< HEAD
                      <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a href="#" class="title_text"><?php echo $rightbar[0]["Cate_Pro_Name"]; ?></a> </h2>
+=======
+                     <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a href="#"
+                           class="title_text"><?php echo $rightbar[0]["Cate_Pro_Name"]; ?></a> </h2>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                      <ul class="catg1_nav">
                         <?php
                         foreach ($rightbar as $value_rb) {
@@ -143,7 +168,12 @@ include Path::path_file_local('Global');
             <div class="col-lg-8 col-md-8">
                <div class="content_bottom_left">
                   <div class="single_category wow fadeInDown">
+<<<<<<< HEAD
                      <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span><a class="title_text" href="#"><?php echo $singleCategoryOne[0]["Cate_Pro_Name"] ?></a> </h2>
+=======
+                     <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span><a
+                           class="title_text" href="#"><?php echo $singleCategoryOne[0]["Cate_Pro_Name"] ?></a> </h2>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                      <div class="business_category_left wow fadeInDown">
                         <ul class="fashion_catgnav">
                            <li>
@@ -154,11 +184,24 @@ include Path::path_file_local('Global');
                               $link = linkProductDetail($product['Product_Slug']);
                               ?>
 
+<<<<<<< HEAD
                               <div class="catgimg2_container"> <a href="<?php echo $link ?>"><img alt="<?php echo $product["Product_Name"] ?>" src="<?php echo $image_name ?>"></a>
                               </div>
                               <h2 class="catg_titile"><a href="<?php echo $link ?>"><?php echo $product["Product_Name"] ?></a>
                               </h2>
                               <div class="comments_box"> <span class="meta_date"><?php echo product_date($product['created_at']); ?></span> <span class="meta_comment"><a href="#">No Comments</a></span> <span class="meta_more"><a href="#">Read More...</a></span> </div>
+=======
+                              <div class="catgimg2_container"> <a href="<?php echo $link ?>"><img
+                                       alt="<?php echo $product["Product_Name"] ?>" src="<?php echo $image_name ?>"></a>
+                              </div>
+                              <h2 class="catg_titile"><a
+                                    href="<?php echo $link ?>"><?php echo $product["Product_Name"] ?></a>
+                              </h2>
+                              <div class="comments_box"> <span
+                                    class="meta_date"><?php echo product_date($product['created_at']); ?></span> <span
+                                    class="meta_comment"><a href="#">No Comments</a></span> <span class="meta_more"><a
+                                       href="#">Read More...</a></span> </div>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                               <p><?php echo General::limitContent($product["Meta_Desc_Product"], 20)  ?></p>
 
                            </li>
@@ -172,6 +215,7 @@ include Path::path_file_local('Global');
                               $image_name = product_upload($product['Product_Image']);
                               $link = linkProductDetail($product['Product_Slug']);
                            ?>
+<<<<<<< HEAD
                               <li>
                                  <div class="media wow fadeInDown"> <a class="media-left" href="<?php echo $link ?>"><img src="<?php echo $image_name; ?>" alt=""></a>
                                     <div class="media-body">
@@ -183,6 +227,22 @@ include Path::path_file_local('Global');
                                     </div>
                                  </div>
                               </li>
+=======
+                           <li>
+                              <div class="media wow fadeInDown"> <a class="media-left" href="<?php echo $link ?>"><img
+                                       src="<?php echo $image_name; ?>" alt=""></a>
+                                 <div class="media-body">
+                                    <h4 class="media-heading"><a
+                                          href="<?php echo $link ?>"><?php echo $product['Product_Name'] ?>
+                                       </a></h4>
+                                    <div class="comments_box"> <span
+                                          class="meta_date"><?php echo product_date($product['created_at']) ?></span>
+                                       <span class="meta_comment"><a href="#">No Comments</a></span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </li>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                            <?php
                            }
                            ?>
@@ -201,6 +261,7 @@ include Path::path_file_local('Global');
                         $image_name = product_upload($product['Product_Image']);
                         $link = linkProductDetail($product['Product_Slug']);
                      ?>
+<<<<<<< HEAD
                         <div class="col-md-6" style="<?php echo $check % 2 != 0 ? 'float:none;' : '' ?> padding-right:0px">
                            <!-- <div class="col-md-6" style="<?php echo $check % 2 != 0 ? 'float:none;' : '' ?>"> -->
                            <div class="single_category">
@@ -218,11 +279,36 @@ include Path::path_file_local('Global');
                               </ul>
                               <ul class="small_catg wow fadeInDown">
                                  <?php
+=======
+                     <div class="col-md-6" style="<?php echo $check % 2 != 0 ? 'float:none;' : '' ?> padding-right:0px">
+                        <!-- <div class="col-md-6" style="<?php echo $check % 2 != 0 ? 'float:none;' : '' ?>"> -->
+                        <div class="single_category">
+                           <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span>
+                              <a class="title_text" href="#"><?php echo $product['Cate_Pro_Name']  ?></a>
+                           </h2>
+                           <ul class="fashion_catgnav wow fadeInDown">
+                              <li>
+                                 <div class="catgimg2_container"> <a href="<?php echo $link  ?>"><img alt=""
+                                          src="<?php echo $image_name ?>"></a> </div>
+                                 <h2 class="catg_titile"><a
+                                       href="<?php echo $link  ?>"><?php echo $product['Product_Name']  ?></a>
+                                 </h2>
+                                 <div class="comments_box"> <span
+                                       class="meta_date"><?php echo $product['created_at']  ?></span> <span
+                                       class="meta_comment"><a href="#">No Comments</a></span> <span
+                                       class="meta_more"><a href="#">Read More...</a></span> </div>
+                                 <p><?php echo General::limitContent($product['Meta_Desc_Product'], 20)  ?></p>
+                              </li>
+                           </ul>
+                           <ul class="small_catg wow fadeInDown">
+                              <?php
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                                  foreach ($category_value as $product) {
                                     $image_name = product_upload($product['Product_Image']);
                                     $link = linkProductDetail($product['Product_Slug']);
                                  ?>
 
+<<<<<<< HEAD
                                     <li>
                                        <div class="media"> <a class="media-left" href="<?php $link ?>"><img src="<?php echo $image_name; ?>" alt=""></a>
                                           <div class="media-body">
@@ -241,6 +327,29 @@ include Path::path_file_local('Global');
                               </ul>
                            </div>
                         </div>
+=======
+                              <li>
+                                 <div class="media"> <a class="media-left" href="<?php $link ?>"><img
+                                          src="<?php echo $image_name; ?>" alt=""></a>
+                                    <div class="media-body">
+                                       <h4 class="media-heading"><a
+                                             href="<?php echo $link ?>"><?php echo $product['Product_Name'] ?>
+                                          </a></h4>
+                                       <div class="comments_box"> <span
+                                             class="meta_date"><?php echo product_date($product['created_at']) ?></span>
+                                          <span class="meta_comment"><a href="#">No Comments</a></span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </li>
+                              <?php
+                                 }
+                                 ?>
+
+                           </ul>
+                        </div>
+                     </div>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                      <?php } ?>
                   </div>
 
@@ -251,17 +360,36 @@ include Path::path_file_local('Global');
                      $link = linkProductDetail($product['Product_Slug']);
                      ?>
                      <div class="single_category">
+<<<<<<< HEAD
                         <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a class="title_text" href="#"><?php echo $product['Cate_Pro_Name'] ?></a> </h2>
+=======
+                        <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a
+                              class="title_text" href="#"><?php echo $product['Cate_Pro_Name'] ?></a> </h2>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                         <div class="business_category_left">
                            <ul class="fashion_catgnav wow fadeInDown">
 
                               <li>
+<<<<<<< HEAD
                                  <div class="catgimg2_container"> <a href="<?php echo $link ?>"><img alt="<?php echo $product["Product_Name"] ?>" src="<?php echo $image_name ?>"></a>
                                  </div>
                                  <h2 class="catg_titile"><a href="<?php echo $link  ?>"><?php echo $product["Product_Name"] ?></a>
                                  </h2>
                                  <div class="comments_box"> <span class="meta_date"><?php echo product_date($product['created_at']); ?></span>
                                     <span class="meta_comment"><a href="#">No Comments</a></span> <span class="meta_more"><a href="#">Read More...</a></span>
+=======
+                                 <div class="catgimg2_container"> <a href="<?php echo $link ?>"><img
+                                          alt="<?php echo $product["Product_Name"] ?>"
+                                          src="<?php echo $image_name ?>"></a>
+                                 </div>
+                                 <h2 class="catg_titile"><a
+                                       href="<?php echo $link  ?>"><?php echo $product["Product_Name"] ?></a>
+                                 </h2>
+                                 <div class="comments_box"> <span
+                                       class="meta_date"><?php echo product_date($product['created_at']); ?></span>
+                                    <span class="meta_comment"><a href="#">No Comments</a></span> <span
+                                       class="meta_more"><a href="#">Read More...</a></span>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
                                  </div>
                                  <p><?php echo General::limitContent($product["Meta_Desc_Product"], 20)  ?></p>
 
@@ -276,6 +404,7 @@ include Path::path_file_local('Global');
                                  $image_name = product_upload($product['Product_Image']);
                                  $link = linkProductDetail($product['Product_Slug']);
                               ?>
+<<<<<<< HEAD
                                  <li>
                                     <div class="media wow fadeInDown"> <a class="media-left" href="<?php echo $link ?>"><img src="<?php echo $image_name; ?>" alt=""></a>
                                        <div class="media-body">
@@ -287,6 +416,22 @@ include Path::path_file_local('Global');
                                        </div>
                                     </div>
                                  </li>
+=======
+                              <li>
+                                 <div class="media wow fadeInDown"> <a class="media-left"
+                                       href="<?php echo $link ?>"><img src="<?php echo $image_name; ?>" alt=""></a>
+                                    <div class="media-body">
+                                       <h4 class="media-heading"><a
+                                             href="<?php echo $link ?>"><?php echo $product['Product_Name'] ?>
+                                          </a></h4>
+                                       <div class="comments_box"> <span
+                                             class="meta_date"><?php echo product_date($product['created_at']) ?></span>
+                                          <span class="meta_comment"><a href="#">No Comments</a></span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </li>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
 
                               <?php
                               }
@@ -307,6 +452,10 @@ include Path::path_file_local('Global');
       </section>
    </div>
    <?php Path::path_file_include('Footer') ?>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
    <?php Path::path_file_include('Script_resource') ?>
 
 </body>

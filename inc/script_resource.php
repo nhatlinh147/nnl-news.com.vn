@@ -36,12 +36,18 @@
 <script src="<?php echo Path::path_file('Assets_js_wow.min') ?>"></script>
 <script src="<?php echo Path::path_file('Assets_js_slick.min') ?>"></script>
 <script src="<?php echo Path::path_file('Assets_js_bootstrap-typeahead.min') ?>"></script>
+<<<<<<< HEAD
 
 <!-- custom js -->
 <script src="<?php echo Path::path_file('Assets_js_custom') ?>"></script>
 <script src="<?php echo Path::path_file('Assets_js_custom_typehead') ?>"></script>
 <script src="<?php echo Path::path_file("Assets_js_custom_function") ?>"></script>
 <!-- END -->
+=======
+<!-- custom js -->
+<script src="<?php echo Path::path_file('Assets_js_custom') ?>"></script>
+<script src="<?php echo Path::path_file('Assets_js_custom_typehead') ?>"></script>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
 
 <script>
    var path =

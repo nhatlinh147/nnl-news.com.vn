@@ -23,6 +23,7 @@ AND Order_Date < CURDATE() - INTERVAL DAYOFWEEK(CURDATE()) - 1 DAY
 -- Lấy dữ liệu cuối ngày tuần trước
 SELECT SUM(Visitor_Jeans) as Sum_Jeans , SUM(Visitor_Sweater) as Sum_Sweater,SUM(Visitor_Men_Shirt) as Sum_Men_Shirt, Visitor_Date FROM tbl_visitor GROUP BY DATE_FORMAT(`Visitor_Date`, '%d-%m-%Y') HAVING DATE_FORMAT(`Visitor_Date`, '%d-%m-%Y') = DATE_FORMAT((SELECT MAX(Visitor_Date) FROM tbl_visitor), '%d-%m-%Y') LIMIT 1 OFFSET 0
 
+<<<<<<< HEAD
 -- tbl_comment
 CREATE TABLE `tbl_comment` (
   `id` INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -51,6 +52,25 @@ CREATE TABLE `tbl_customer` (
   `Customer_Address` varchar(50) NOT NULL,
   `Customer_Password` varchar(255) NOT NULL,
   `Created_At` date NOT NULL
+=======
+
+CREATE TABLE `tbl_info` (
+  `Info_ID` INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  `Info_Webname` varchar(50) NOT NULL,
+  `Info_Shopname` varchar(50) NOT NULL,
+  `Info_Phone` varchar(50) NOT NULL,
+  `Info_Social` varchar(50) NOT NULL,
+  `Info_Image` varchar(50) NOT NULL,
+  `Info_About_Us` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `tbl_contact` (
+  `Contact_ID` INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  `Contact_Name` varchar(50) NOT NULL,
+  `Contact_Email` varchar(50) NOT NULL,
+  `Contact_Subject` varchar(50) NOT NULL,
+  `Contact_Message` text NOT NULL
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Update auto_increment

@@ -38,14 +38,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                ?></pre>
 
          <form action="<?php echo General::view_link('dang-nhap.html'); ?>" method="post">
+<<<<<<< HEAD
             <input type="email" class="ggg account_email" name="account_email" id="account_email" placeholder="E-MAIL"
                value="">
+=======
+            <input type="email" class="ggg account_email" name="account_email" id="account_email" placeholder="E-MAIL" value="">
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
             <input type="password" class="ggg" name="account_password" placeholder="PASSWORD" value="">
             <span><input type="checkbox" />Remember Me</span>
             <h6><a href="#">Forgot Password?</a></h6>
             <div class="clearfix"></div>
             <input type="submit" value="Sign In" name="login">
             <style>
+<<<<<<< HEAD
             ul.Social_Icon {
                margin-bottom: 10px;
                list-style: none;
@@ -55,6 +60,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ul.Social_Icon li {
                margin: 10px;
             }
+=======
+               ul.Social_Icon {
+                  margin-bottom: 10px;
+                  list-style: none;
+                  display: flex;
+               }
+
+               ul.Social_Icon li {
+                  margin: 10px;
+               }
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
             </style>
             <h3 style="color:white">Hoặc đăng nhập với : </h3>
             <ul class="Social_Icon">
@@ -62,8 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </ul>
 
          </form>
+<<<<<<< HEAD
          <p>Bạn có tài khoản không ? Nếu không có thì tiến hành<a
                href="<?php echo General::view_link('dang-ky.html'); ?>">Tạo tài khoản</a></p>
+=======
+         <p>Bạn có tài khoản không ? Nếu không có thì tiến hành<a href="<?php echo General::view_link('dang-ky.html'); ?>">Tạo tài khoản</a></p>
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
       </div>
    </div>
 

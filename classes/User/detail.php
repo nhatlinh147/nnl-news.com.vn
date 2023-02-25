@@ -108,7 +108,11 @@ class Detail
 			return false;
 		}
 	}
+<<<<<<< HEAD
 	//Lấy sản phẩm tương tự nhau sau đó đưa nó về dữ liệu html
+=======
+
+>>>>>>> 0e133387dca52c7ccb8a8ad1bc5816e4a6b64f95
 	public function getSimilarPost($cate_id, $product_slug)
 	{
 		$query = "SELECT * FROM tbl_product WHERE Cate_Pro_ID = '$cate_id' AND Product_Slug != '$product_slug' LIMIT 3";
