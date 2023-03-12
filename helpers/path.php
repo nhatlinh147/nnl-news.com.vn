@@ -4,8 +4,8 @@ class Path
 {
 
     private static $parent = [
-        DIRECTORY_SEPARATOR, 'lib', 'helpers', 'inc', 'classes', 'js', 'vendor',
-        'css', 'Admin\inc', 'Admin\js', 'Admin\css',
+        DIRECTORY_SEPARATOR, 'lib', 'helpers', 'inc', 'classes', 'vendor',
+        'Admin\inc', 'Admin\js', 'Admin\css',
         'Admin\ckeditor',
         'Admin\images',
         'Admin\upload\banner', 'Admin\upload\slide', 'Admin\upload\product',
@@ -19,7 +19,7 @@ class Path
 
     public static $sep = DIRECTORY_SEPARATOR;
 
-    private function getNameOrgionalFolder($str)
+    private static function getNameOrgionalFolder($str)
     {
         $arr = explode(DIRECTORY_SEPARATOR, $str);
         for ($i = 0; $i < count($arr); $i++) {

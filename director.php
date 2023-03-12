@@ -5,11 +5,6 @@ require_once 'route/route.php';
 //Nhằm không để mỗi route đều phải khai báo path
 require_once 'helpers/path.php';
 
-// if (!empty($_GET['url'])) {
-// 	$path = handle();
-// } else {
-// 	$path = 'view/index.php';
-// }
 $url = explode('/', $_GET['url']);
 if (!empty($_GET['url'])) {
 	$url = explode('/', $_GET['url']);
@@ -26,6 +21,7 @@ if (file_exists($path)) {
 	if (!session_id()) {
 		session_start();
 	}
+
 	Path::path_file_include('Session', 'General', 'Database', 'Format');
 	require_once $path;
 } else {

@@ -2,7 +2,6 @@
 
 class General
 {
-    public static $base_local = "D:/xampp/htdocs/nnl-news.com.vn/";
     private static $base = 'http://localhost/nnl-news.com.vn/';
 
     public static function view($url, $cond = false)
