@@ -13,20 +13,19 @@
    <link rel="stylesheet" type="text/css" href="<?php echo Path::path_file('Assets_css_theme') ?>">
    <link rel="stylesheet" type="text/css" href="<?php echo Path::path_file('Assets_css_style') ?>">
    <style>
-   form input.error {
-      border: 3px solid #ff847b;
-   }
+      form input.error {
+         border: 3px solid #ff847b;
+      }
 
-   form label.error {
-      margin: 25px 0px 5px;
-      color: #ff5959;
-   }
+      form label.error {
+         color: #ff5959;
+      }
 
-   div.notify-error {
-      color: #ff0e0e;
-      margin: 1.5rem 2rem;
-      font-weight: 600;
-      font-size: medium;
-   }
+      div.notify-error {
+         color: #ff0e0e;
+         margin: 1.5rem 2rem;
+         font-weight: 600;
+         font-size: medium;
+      }
    </style>
 </head>

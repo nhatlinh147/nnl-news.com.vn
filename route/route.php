@@ -63,7 +63,10 @@ $routes_user = [
 	"danh-muc/(.+)" => "category/category-main.php?category_slug=$1",
 	"lien-he" => "contact/contact.php",
 	"dang-nhap" => "login/sign-in.php",
+	"dang-ky" => "login/sign-up.php",
 	"gui-mail-lien-he" => "contact/letter-contact.php",
+	"mail-xac-nhan-thanh-cong" => "login/notify-success-customer.php",
+	"gui-mail-xac-nhan" => "login/notify-sending-email",
 ];
 
 if (!empty($routes) && is_array($routes)) {

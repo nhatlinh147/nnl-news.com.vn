@@ -70,7 +70,7 @@ class SignIn
 
 					Session::set('Customer_ID', $value['Customer_ID']);
 					Session::set('Customer_Email', $value['Customer_Email']);
-					Session::set('Customer_Name', $value['Customer_Fullname']);
+					Session::set('Customer_User', $value['Customer_User']);
 
 					General::view('trang-chu.html', true);
 				}

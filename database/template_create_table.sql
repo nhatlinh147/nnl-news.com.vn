@@ -53,6 +53,10 @@ CREATE TABLE `tbl_customer` (
   `Created_At` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+SELECT * FROM users WHERE email = ''--' AND pass  = 'OR 1=1' LIMIT 1
+SELECT * FROM users WHERE email = '' AND pass  = '' OR '1' = '1' --' LIMIT 1
+SELECT * FROM users WHERE email = 'user@email.com' AND pass  = '' OR  '1' = '1' --' LIMIT 1
+
 -- Update auto_increment
 ALTER TABLE document MODIFY COLUMN document_id INT auto_increment
 SELECT Product_ID,Product_Name,Product_View,Product_Slug FROM tbl_product WHERE Product_ID IN (732,733)

@@ -23,6 +23,9 @@ if (!empty($_GET['url'])) {
 }
 
 if (file_exists($path)) {
+	if (!session_id()) {
+		session_start();
+	}
 	Path::path_file_include('Session', 'General', 'Database', 'Format');
 	require_once $path;
 } else {
@@ -33,12 +36,3 @@ if (file_exists($path)) {
 		require_once 'view/error/404.php';
 	}
 }
-
-?>
-
-<!-- <pre>
-	<h3>Địa chỉ url: </h3>
-	<?php echo $_GET['url']; ?>
-	<h3>Đường dẫn cụ thể: </h3>
-	<?php echo $GLOBALS['path'] ?>
-</pre> -->

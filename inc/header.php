@@ -6,8 +6,17 @@
                <ul class="top_nav">
                   <li><a href="<?php echo General::view_link("trang-chu.html", true) ?>">Home</a></li>
                   <li><a href="<?php echo General::view_link("gioi-thieu.html", true) ?>">About</a></li>
-                  <li><a href="<?php echo General::view_link("dang-nhap.html", true) ?>">Sign In</a></li>
                   <li><a href="<?php echo General::view_link("lien-he.html", true) ?>">Contact</a></li>
+
+                  <?php
+                  if (!empty($_SESSION['CustomerLogin'])) {
+                  ?>
+                     <li><?php echo $_SESSION['Customer_User'] ?></li>
+                     <li><a href="?action=logout">Log out</a>
+                     </li>
+                  <?php } else { ?>
+                     <li><a href="<?php echo General::view_link("dang-nhap.html", true) ?>">Sign In</a></li>
+                  <?php } ?>
                </ul>
             </div>
             <div class="header_top_right">

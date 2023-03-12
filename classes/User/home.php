@@ -67,4 +67,16 @@ class Home
 		$result = General::getArrayFetchAssoc($result) ?? "false";
 		return $result;
 	}
+	public function log_out()
+	{
+		if (!empty($_SESSION['CustomerLogin']) && isset($_GET['action']) && $_GET['action'] == "logout") {
+			unset(
+				$_SESSION['CustomerLogin'],
+				$_SESSION['Customer_ID'],
+				$_SESSION['Customer_Email'],
+				$_SESSION['Customer_User']
+			);
+			General::view_link_location("dang-nhap.html", true);
+		}
+	}
 }

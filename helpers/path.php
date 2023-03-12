@@ -14,7 +14,7 @@ class Path
         'vendor\phpmailer\phpmailer\src',
         'view', 'view\assets\css', 'view\assets\js', 'classes\User',
         'view\ckeditor-user',
-        'view\category', 'view\assets\js\custom'
+        'view\category', 'view\assets\js\custom', 'view\upload\comment'
     ];
 
     public static $sep = DIRECTORY_SEPARATOR;
@@ -44,7 +44,6 @@ class Path
             // $myfiles = array_filter(scandir($mydir . $sep .'vendor'), function($item) {
             //     return !is_dir($mydir . $sep .'vendor' . $sep . $item);
             // });
-
             foreach ($myfiles as $value) {
 
                 if (!is_dir($mydir . $sep . $value)) {

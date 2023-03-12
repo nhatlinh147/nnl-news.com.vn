@@ -1,6 +1,17 @@
 <?php
-Path::path_file_include('User_detail', 'Autoload');
+Session::checkLoginCustomer();
+
+Path::path_file_include('User_detail', 'Autoload', 'User_signIn', 'User_signUp');
 include Path::path_file_local('Global');
+
+$class = new SignUp();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   $carbon = new Carbon\Carbon;
+   $_POST['customer_date'] = $carbon->now('Asia/Ho_Chi_Minh');
+   $_POST['customer_login'] = "nnl-news";
+   $check_login = $class->sign_up($_POST);
+}
 ?>
 <!-- START Tải tài nguyên ban đầu -->
 <?php Path::path_file_include('Header_resource') ?>
@@ -12,40 +23,78 @@ include Path::path_file_local('Global');
   </div> -->
    <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
    <div class="container">
-      <!-- START Header top -->
-      <?php Path::path_file_include('Header') ?>
-      <!-- END -->
-
-      <!-- START Navbar-nav -->
-      <?php Path::path_file_include('Navbar-nav') ?>
-      <!-- END -->
       <section id="ContactContent">
          <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                <div class="contact_area">
-                  <h1>Contacts</h1>
-                  <p>Vestibulum id nisl a neque malesuada hendrerit. Mauris ut porttitor nunc, ut volutpat nisl. Nam
-                     ullamcorper ultricies metus vel ornare. Vivamus tincidunt erat in mi accumsan, a sollicitudin
-                     risus vestibulum. Nam dignissim purus vitae nisl adipiscing ultricies. Pellentesque in porttitor
-                     tellus. Integer fermentum in sem eu tempus. In eu metus vitae nibh laoreet sollicitudin et ac
-                     lectus. Curabitur blandit velit elementum augue elementum scelerisque.</p>
-                  <div class="contact_bottom">
-                     <div class="hide_content wow fadeInRightBig" style="display:none;text-align: center;">
+                  <h1>Đăng nhập</h1>
+
+                  <!-- START login form -->
+                  <div class="omb_login">
+                     <h3 class="omb_authTitle">Nếu bạn đã có tài khoản thì xin hãy <a href="<?php echo General::view_link("dang-nhap.html", true) ?>">đăng
+                           nhập</a></h3>
+
+                     <div class="row omb_row-sm-offset-3 omb_loginOr">
+                        <div class="col-xs-12 col-sm-6">
+                           <hr class="omb_hrOr">
+                           <span class="omb_spanOr">or</span>
+                        </div>
                      </div>
-                     <div class="contact_us wow fadeInRightBig">
-                        <h2>Contact Us</h2>
-                        <form class="contact_form" action="javascript:void(0)">
-                           <input class="form-control" name="contact_name" type="text" placeholder="Name(required)">
-                           <input class="form-control" name="contact_email" type="email" placeholder="E-mail(required)">
-                           <input class="form-control" name="contact_subject" type="text" placeholder="Subject">
-                           <textarea class="form-control" name="contact_message" cols="30" rows="10" placeholder="Message(required)" id="Ckeditor_Content"></textarea>
-                           <input type="submit" value="Send">
-                        </form>
+
+                     <div class="row omb_row-sm-offset-3">
+                        <div class="col-xs-12 col-sm-6">
+                           <div class="notify-error">
+
+                              <?php
+                              if (isset($check_login)) {
+                                 echo $check_login;
+                              }
+                              ?>
+
+                           </div>
+                           <form class="omb_loginForm" action="" autocomplete="off" method="POST">
+
+                              <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                 <input type="text" class="form-control" name="customer_user" placeholder="Nhập tên tài khoản">
+                              </div>
+
+                              <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-mail-forward"></i></span>
+                                 <input type="text" class="form-control" name="customer_email" placeholder="Nhập email">
+                              </div>
+
+                              <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                 <input type="text" class="form-control" name="customer_address" placeholder="Nhập địa chỉ">
+                              </div>
+
+                              <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                 <input type="text" class="form-control" name="customer_phone" placeholder="Nhập số điện thoại">
+                              </div>
+
+                              <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                 <input type="password" class="form-control" name="customer_password" id="customer_password" placeholder="Nhập mật khẩu">
+                              </div>
+
+                              <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                 <input type="password" class="form-control" name="customer_confirm_password" placeholder="Nhập lại mật khẩu">
+                              </div>
+
+                              <div class="input-group">
+                                 <input type="checkbox" value="remember-me" name="agree_policy"> Chính sách bảo mật
+                              </div>
+
+                              <button class="btn btn-lg btn-basic btn-block" type="submit">Đăng ký</button>
+                           </form>
+                        </div>
                      </div>
                   </div>
-               </div>
-            </div>
-         </div>
+                  <!-- END -->
+
       </section>
    </div>
 
@@ -56,106 +105,75 @@ include Path::path_file_local('Global');
    <?php Path::path_file_include('Ckeditor_replace') ?>
 
    <script>
-      function CKupdate() {
-         for (instance in CKEDITOR.instances) {
-            CKEDITOR.instances[instance].updateElement();
-            CKEDITOR.instances[instance].setData('');
-         }
-      }
-      $("form.contact_form").validate({
+      General.insert_head("<?php echo Path::path_file('Assets_css_style-custom') ?>", 1);
+
+      $.validator.addMethod("regex", function(value, element, regexp) {
+         var re = new RegExp(regexp);
+         return this.optional(element) || re.test(value);
+      }, "Please check your input.");
+
+
+      $("form.omb_loginForm").validate({
          ignore: [],
          rules: {
-            contact_name: {
+            customer_user: {
                required: true,
-               minlength: 6
+               regex: '^[A-Za-z]{1}[A-Za-z0-9]{5,31}$',
             },
-            contact_email: {
+            customer_email: {
                required: true,
                email: true,
             },
-            contact_subject: {
+            customer_phone: {
+               required: true,
+               regex: "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$"
+            },
+            customer_address: {
                required: true
             },
-            contact_message: {
-               required: function(textarea) {
-                  CKEDITOR.instances[textarea.id].updateElement();
-                  var editorcontent = textarea.value.replace(/<[^>]*>/gi, '');
-                  return editorcontent.length === 0;
-               }
+            customer_password: {
+               required: true,
+               regex: "^(((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])))(?=.{6,})",
             },
+            customer_confirm_password: {
+               required: true,
+               equalTo: "#customer_password"
+            },
+            agree_policy: {
+               required: true,
+            }
          },
          messages: {
-            contact_name: {
-               required: "Tên người liên hệ không được để trống",
-               minlength: 6
+            customer_user: {
+               required: "Tên tài khoản không được để trống",
+               regex: "Tên tài khoản gồm chữ cái trong alphabet, chữ số. Đồng thời nhiều hơn 7 ký tự",
             },
-            contact_email: {
-               required: "Email người liên hệ không được để trống",
-               email: "Email không được để trống",
+            customer_email: {
+               required: "Email không được để trống",
+               email: "Email không hợp lệ"
             },
-            contact_subject: {
-               required: "Tiêu đề mail không được để trống",
+            customer_phone: {
+               required: "Số điện thoại không được để trống",
+               regex: "Số điện thoại phải bắt đầu bằng 0, có đủ 11 số"
             },
-            contact_message: {
-               required: "Nội dung mail không được để trống",
+            customer_address: {
+               required: "Địa chỉ không được để trống",
+            },
+            customer_password: {
+               required: "Mật khẩu không được để trống",
+               regex: "Mức độ mật khẩu chưa tốt"
+            },
+            customer_confirm_password: {
+               required: "Xác nhận mật khẩu không được để trống",
+               equalTo: "Xác nhận mật khẩu không khớp"
+            },
+            agree_policy: {
+               required: "Bạn phải đồng ý với chính sách bảo mật thì mới có thể đăng ký",
             },
          },
          errorPlacement: function(error, element) {
-            // if (element.is(":radio"))
-            //    error.insertAfter(element.parent("label").next());
-            // else if (element.is(":checkbox"))
-            //    error.insertAfter(element.next());
-            // else
-            error.insertBefore(element);
+            error.insertBefore(element.parent("div.input-group").next());
          },
-         submitHandler: function(form) {
-            let url_link =
-               "<?php echo Content::put_content('User_contact', 'Contact', 'exeContact', 'gui-tin-lien-he.php', 'query') ?>";
-            let data = new FormData($("form.contact_form")[0]);
-            var get_content = $("div.contact_us").html();
-            $.ajax({
-               data: data,
-               url: url_link,
-               type: "POST",
-               dataType: 'json',
-               processData: false,
-               contentType: false,
-               beforeSend: function() {
-                  //Tiến hành ẩn đi form và hiện nội dung thông báo
-                  $('div.contact_us').hide();
-                  $('div.hide_content').show();
-                  $('div.hide_content').html(
-                     `<h4 class="wow fadeInRightBig" style="font-style: italic;"> Đang tiến hành gửi mail ... </h4>`
-                  );
-               },
-               success: function(data) {
-                  if (!data) {
-                     $('div.hide_content').html(
-                        `<h1 class="wow fadeInRightBig" style="color:red;font-weight: bold;"> Gửi mail thất bại</h1>
-                     <button class="btn btn-lg btn-danger" id="Submit_Button">Quay Lại</button>`
-                     );
-                  } else {
-                     $('div.hide_content').html(
-                        `<h1 class="wow fadeInRightBig" style="color:green;font-weight: bold;"> Gửi mail thành công</h1>
-                     <button class="btn btn-lg btn-success" id="Submit_Button">Quay Lại</button>`
-                     );
-                  }
-
-                  //Bắt sự kiện click button quay lại khi đăng ký thất bại hoặc thành công
-                  $(document).on('click', 'button#Submit_Button', function() {
-                     $('form.contact_form').trigger("reset");
-                     CKupdate();
-                     //Tiến hành hiện form và xóa đi nội dung thông báo
-                     $('div.hide_content').empty();
-                     $('div.contact_us').show();
-                  })
-
-               }, // END success
-               error: function(data) {
-                  console.log('Error:', data);
-               } // END error
-            }); // END ajax
-         }
       })
    </script>
 

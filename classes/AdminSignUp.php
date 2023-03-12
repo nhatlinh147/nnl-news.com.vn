@@ -88,7 +88,7 @@ class AdminSignUp
 
 		$query = "SELECT tbl_account.* ,tbl_token_email.* FROM tbl_account
 		INNER JOIN tbl_token_email ON tbl_token_email.Token_Email_Account = tbl_account.Account_ID
-		WHERE Account_Email = '$to_email' LIMIT 1";
+		WHERE Account_Email = '$to_email' AND Account_Fullname = '$to_name' LIMIT 1";
 		$result = $this->db->select($query);
 		$result = $result->fetch_assoc();
 
@@ -131,10 +131,10 @@ class AdminSignUp
 	}
 	// Update thuoocjc tính status trong tbl_account
 	// xóa token account trong bảng tbl_token_email
-	private function update_account($id)
+	private function update_account($id, $token)
 	{
 		$this->db->update("UPDATE tbl_account SET Account_Status = 1 WHERE Account_ID = '$id'");
-		$this->db->delete("DELETE FROM tbl_token_email where Token_Email_Account = '$id'");
+		$this->db->delete("DELETE FROM tbl_token_email WHERE Token_Email_Account = '$id' AND Token_Email_Code = '$token'");
 	}
 	public function check_token($token)
 	{
@@ -146,7 +146,7 @@ class AdminSignUp
 		if ($result) {
 			$result = $result->fetch_assoc();
 			$id = $result['Token_Email_Account'];
-			$this->update_account($result['Token_Email_Account']);
+			$this->update_account($result['Token_Email_Account'], $token);
 
 			//lấy giá trị Account_Status sau khi cập nhật
 			$query = "SELECT * FROM tbl_account WHERE Account_ID = " . $id . " LIMIT 1";

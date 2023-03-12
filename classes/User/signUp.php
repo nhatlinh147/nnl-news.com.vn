@@ -14,7 +14,7 @@ use PHPMailer\PHPMailer\Exception;
 /**
  * 
  */
-class AdminSignUp
+class SignUp
 {
 	private $db;
 	private $fm;
@@ -24,7 +24,7 @@ class AdminSignUp
 	{
 		$this->db = new Database();
 		$this->fm = new Format();
-		$this->login = new AdminSignIn();
+		$this->login = new SignIn();
 	}
 	//Nhớ chỉnh lại md5 password trong AdminSignUp và general
 
@@ -47,36 +47,44 @@ class AdminSignUp
 		}
 	}
 
-	public function sign_up($data, $files)
+	public function sign_up($data)
 	{
-		$data['account_status'] = 0;
-		$get_data = General::list_sql($this->db->link, $data, ["account_fullname", "account_user", "account_email", "account_phone", "account_address", "account_password", "account_status", "created_at"]);
+		$get_data = General::list_sql(
+			$this->db->link,
+			$data,
+			[
+				"customer_user", "customer_email", "customer_phone", "customer_address",
+				"customer_password", "customer_login", "customer_status", "customer_date"
+			]
+		);
+
 		eval($get_data);
 
-		//Thêm dữ liệu vào bảng tbl_account
-		$query = "INSERT INTO tbl_account(Account_Fullname , Account_User , Account_Email , Account_Phone ,Account_Address , Account_Password , Account_Status , Created_At) VALUES('$account_fullname','$account_user','$account_email','$account_phone','$account_address','$account_password','$account_status','$created_at')";
+		//Thêm dữ liệu vào bảng tbl_customer
+		$query = "INSERT INTO tbl_customer(Customer_User , Customer_Email , Customer_Phone ,Customer_Address , Customer_Password , Customer_Login , Customer_Status, Customer_Date)
+		VALUES('$customer_user','$customer_email','$customer_phone','$customer_address','$customer_password','$customer_login','$customer_status','$customer_date')";
 		$this->db->insert($query);
 
 		//Select
-		$query = "SELECT * FROM tbl_account WHERE Account_User = '$account_user' AND Account_Email = '$account_email' LIMIT 1";
+		$query = "SELECT * FROM tbl_customer WHERE Customer_User = '$customer_user' AND Customer_Email = '$customer_email' LIMIT 1";
 		$result = $this->db->select($query);
 		$result = $result->fetch_assoc();
 
-		$this->insert_token_email($result['Account_ID']);
+		$this->insert_token_email($result['Customer_ID']);
 
 		try {
 			//Gửi mail xác nhận
-			$this->sending_email($data['account_fullname'], $data['account_email'], $data['account_address']);
+			$this->sending_email($data['customer_user'], $data['customer_email'], $data['customer_address']);
 		} catch (Throwable $e) {
-			$query = "DELETE tbl_account, tbl_token_email FROM tbl_account, tbl_token_email 
-				WHERE tbl_account.Account_ID = tbl_token_email.Token_Email_Account
-				AND tbl_token_email.Token_Email_Account = " . $result['Account_ID'];
+			$query = "DELETE tbl_customer, tbl_token_email FROM tbl_customer, tbl_token_email 
+				WHERE tbl_customer.Customer_ID = tbl_token_email.Token_Email_Account
+				AND tbl_token_email.Token_Email_Account = " . $result['Customer_ID'];
 			$this->db->delete($query);
 			return "Đăng ký không thành công vì email chưa được gửi ! . Xin hãy thử kiểm tra lại tốc độ mạng của bạn";
 		}
 
 		// $this->login->login_admin($data["account_email"], md5("123"));
-		return General::view('gui-mail-xac-nhan');
+		return General::view('gui-mail-xac-nhan', true);
 	}
 
 	public function sending_email($to_name, $to_email, $to_address)
@@ -86,9 +94,9 @@ class AdminSignUp
 		$dotenv = Dotenv\Dotenv::createImmutable($base_name);
 		$dotenv->load();
 
-		$query = "SELECT tbl_account.* ,tbl_token_email.* FROM tbl_account
-		INNER JOIN tbl_token_email ON tbl_token_email.Token_Email_Account = tbl_account.Account_ID
-		WHERE Account_Email = '$to_email' LIMIT 1";
+		$query = "SELECT tbl_customer.* ,tbl_token_email.* FROM tbl_customer
+		INNER JOIN tbl_token_email ON tbl_token_email.Token_Email_Account = tbl_customer.Customer_ID
+		WHERE Customer_Email = '$to_email' AND Customer_User = '$to_name' LIMIT 1";
 		$result = $this->db->select($query);
 		$result = $result->fetch_assoc();
 
@@ -101,17 +109,15 @@ class AdminSignUp
 
 		$setting = array(
 			'%header%' => 'Xác nhận địa chỉ email',
-			'%link_shop%' =>  General::view_link('dang-ky.html'),
-			'%link_button%' => General::view_link('mail-xac-nhan-thanh-cong?token=' . $result['Token_Email_Code']),
-			'%link_show%' => General::view_link('mail-xac-nhan-thanh-cong?token=' . $result['Token_Email_Code']),
+			'%link_shop%' =>  General::view_link('dang-ky.html', true),
+			'%link_button%' => General::view_link('mail-xac-nhan-thanh-cong?token=' . $result['Token_Email_Code'], true),
+			'%link_show%' => General::view_link('mail-xac-nhan-thanh-cong?token=' . $result['Token_Email_Code'], true),
 			'%link_image%' => 'https://i.pinimg.com/originals/fb/6b/8e/fb6b8e21e5a7c57b2d929b9d7f40c148.jpg',
 			'%date%' => date('d-m-Y h:i:s'),
 			'%to_name%' => $to_name,
 			'%to_email%' => $to_email,
 			'%to_address%' => $to_address,
 		);
-
-		Session::set('Register', true);
 
 		$mail->Host = $_ENV['EMAIL_HOST'];
 		$mail->SMTPAuth = true;
@@ -129,31 +135,33 @@ class AdminSignUp
 
 		$mail->send();
 	}
+
 	// Update thuoocjc tính status trong tbl_account
 	// xóa token account trong bảng tbl_token_email
-	private function update_account($id)
+	private function update_account($id, $token)
 	{
-		$this->db->update("UPDATE tbl_account SET Account_Status = 1 WHERE Account_ID = '$id'");
-		$this->db->delete("DELETE FROM tbl_token_email where Token_Email_Account = '$id'");
+		$this->db->update("UPDATE tbl_customer SET Customer_Status = 1 WHERE Customer_ID = '$id'");
+		$this->db->delete("DELETE FROM tbl_token_email WHERE Token_Email_Account = '$id' AND Token_Email_Code = '$token'");
 	}
+
 	public function check_token($token)
 	{
-		$query = "SELECT tbl_account.* ,tbl_token_email.* FROM tbl_account
-		INNER JOIN tbl_token_email ON tbl_token_email.Token_Email_Account = tbl_account.Account_ID
+		$query = "SELECT tbl_customer.* ,tbl_token_email.* FROM tbl_customer
+		INNER JOIN tbl_token_email ON tbl_token_email.Token_Email_Account = tbl_customer.Customer_ID
 		WHERE Token_Email_Code = '$token' LIMIT 1";
 		$result = $this->db->select($query);
 
 		if ($result) {
 			$result = $result->fetch_assoc();
 			$id = $result['Token_Email_Account'];
-			$this->update_account($result['Token_Email_Account']);
+			$this->update_account($result['Token_Email_Account'], $token);
 
-			//lấy giá trị Account_Status sau khi cập nhật
-			$query = "SELECT * FROM tbl_account WHERE Account_ID = " . $id . " LIMIT 1";
+			//lấy giá trị Customer_Status sau khi cập nhật
+			$query = "SELECT * FROM tbl_customer WHERE Customer_ID = " . $id . " LIMIT 1";
 			$result = $this->db->select($query);
 			$result = $result->fetch_assoc();
 
-			if ($result['Account_Status'] == 0) {
+			if ($result['Customer_Status'] == 0) {
 				$alert = "Email đã quá thời hạn xác nhận email. Xin hãy đăng ký lại địa chỉ email";
 				$final = false;
 			} else {

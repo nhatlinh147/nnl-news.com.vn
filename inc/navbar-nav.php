@@ -9,6 +9,7 @@
          <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav custom_nav">
                <li class=""><a href="<?php echo General::view_link("trang-chu", true) ?>">Home</a></li>
+
                <?php
                //Hiển thị dữ liệu danh mục cha
                global $category_parent, $show_category, $category, $result_slug;
@@ -17,8 +18,8 @@
                   $active = $result["Cate_Pro_Slug"] == General::getParam(1) ||  $result["Cate_Pro_Slug"] == $result_slug ? "active" : "";
                ?>
 
-               <li class="dropdown <?php echo $active ?>"> <a
-                     href="<?php echo linkCategory($result["Cate_Pro_Slug"]) ?>" class="" data-toggle="dropdown"
+               <li class="dropdown <?php echo $active ?>">
+                  <a href="<?php echo linkCategory($result["Cate_Pro_Slug"]) ?>" class="" data-toggle="dropdown"
                      role="button" aria-expanded="false"><?php echo $result['Cate_Pro_Name'] ?></a>
                   <?php
                      //Điều kiện để xác định category nào có danh mục con
@@ -34,6 +35,7 @@
                            }
                            ?>
                   </ul>
+
                   <?php
                      }
                      ?>

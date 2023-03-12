@@ -1,6 +1,7 @@
 <?php
 Path::path_file_include('User_detail', 'Autoload');
 include Path::path_file_local('Global');
+
 ?>
 
 <?php Path::path_file_include('Header_resource') ?>

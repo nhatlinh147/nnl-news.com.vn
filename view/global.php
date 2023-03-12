@@ -24,6 +24,9 @@ $footer_info = $show_home['info'];
 
 $singleCategoryOne = $home->productOfCateChild(64, 4);
 
+//đăng xuất tài khoản
+$home->log_out();
+
 $singleCategory = [
    [
       'data' => $home->productOfCateChild(70, 3),

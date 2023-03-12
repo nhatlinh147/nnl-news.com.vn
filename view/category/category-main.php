@@ -52,27 +52,27 @@ $total_pages = ceil($total_records / $record_per_page); // Tổng số trang
       <?php Path::path_file_include('Navbar-nav') ?>
       <!-- END -->
       <style>
-      div.category_child ul {
-         text-align: center;
-      }
+         div.category_child ul {
+            text-align: center;
+         }
 
-      div.category_child ul li {
-         background-color: #ffa500;
-         margin: 10px 0px;
-         display: inline-flex;
-         padding: 5px 10px;
-         color: white;
-      }
+         div.category_child ul li {
+            background-color: #ffa500;
+            margin: 10px 0px;
+            display: inline-flex;
+            padding: 5px 10px;
+            color: white;
+         }
 
-      div.category_child ul li:hover,
-      div.category_child ul li:active {
-         font-weight: bold;
-         background-color: #798992;
-      }
+         div.category_child ul li:hover,
+         div.category_child ul li:active {
+            font-weight: bold;
+            background-color: #798992;
+         }
 
-      div.category_child ul li a {
-         color: white;
-      }
+         div.category_child ul li a {
+            color: white;
+         }
       </style>
       <section id="mainContent">
          <div class="content_bottom">
@@ -82,37 +82,35 @@ $total_pages = ceil($total_records / $record_per_page); // Tổng số trang
                      <div class="archive_style_1 row">
 
                         <?php if (!empty($get_child)) { ?>
-                        <div style="margin-top:15px;" class="category_child">
-                           <ul>
+                           <div style="margin-top:15px;" class="category_child">
+                              <ul>
 
-                              <?php while ($result = $get_child->fetch_assoc()) { ?>
-                              <li><a
-                                    href="<?php echo linkCategory($result['Cate_Pro_Slug']) ?>"><?php echo $result['Cate_Pro_Name'] ?></a>
-                              </li>
-                              <?php } ?>
+                                 <?php while ($result = $get_child->fetch_assoc()) { ?>
+                                    <li><a href="<?php echo linkCategory($result['Cate_Pro_Slug']) ?>"><?php echo $result['Cate_Pro_Name'] ?></a>
+                                    </li>
+                                 <?php } ?>
 
-                           </ul>
-                        </div>
+                              </ul>
+                           </div>
 
                         <?php } else { ?>
-                        <div style="margin-top:15px;">
-                           <ol class="breadcrumb">
-                              <li><a href="<?php echo General::view_link("trang-chu", true)  ?>">Home</a>
-                              </li>
-                              <?php if(!empty($result_slug)){ ?>
-                              <li><a href="<?php echo linkCategory($result_slug) ?>"><?php echo $result_name ?></a>
-                              </li>
-                              <?php } ?>
-                              <li><a href="<?php echo linkCategory($get_slug) ?>"><?php echo $get_name ?></a>
-                              </li>
+                           <div style="margin-top:15px;">
+                              <ol class="breadcrumb">
+                                 <li><a href="<?php echo General::view_link("trang-chu", true)  ?>">Home</a>
+                                 </li>
+                                 <?php if (!empty($result_slug)) { ?>
+                                    <li><a href="<?php echo linkCategory($result_slug) ?>"><?php echo $result_name ?></a>
+                                    </li>
+                                 <?php } ?>
+                                 <li><a href="<?php echo linkCategory($get_slug) ?>"><?php echo $get_name ?></a>
+                                 </li>
 
 
-                           </ol>
-                        </div>
+                              </ol>
+                           </div>
                         <?php } ?>
 
-                        <h2 style="margin-bottom: 20px;"> <span class="bold_line"><span></span></span> <span
-                              class="solid_line"></span> <span class="title_text">Latest Updates</span> </h2>
+                        <h2 style="margin-bottom: 20px;"> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <span class="title_text">Latest Updates</span> </h2>
 
                         <?php Path::path_file_include('Category_category-content') ?>
 

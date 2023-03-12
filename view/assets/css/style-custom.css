@@ -74,9 +74,15 @@
 	}
 }
 /* style custom css */
+
 form.omb_loginForm .btn-basic {
 	background-color: #ffa500;
 }
+
+form.omb_loginForm .input-group {
+	margin: 15px 0px;
+}
+
 body {
 	padding-top: 40px;
 	padding-bottom: 40px;

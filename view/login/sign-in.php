@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    <!-- <div id="preloader">
     <div id="status">&nbsp;</div>
   </div> -->
+
    <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
    <div class="container">
       <section id="ContactContent">
@@ -30,7 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                   <!-- START login form -->
                   <div class="omb_login">
-                     <h3 class="omb_authTitle">Login or <a href="#">Sign up</a></h3>
+                     <h3 class="omb_authTitle">Đăng nhập hoặc
+                        <a href="<?php echo General::view_link("dang-ky.html", true) ?>">Đăng ký</a> hoặc
+                        <a href="<?php echo General::view_link("trang-chu.html", true) ?>">Trang chủ</a>
+                     </h3>
+
                      <div class="row omb_row-sm-offset-3 omb_socialButtons">
                         <div class="col-xs-4 col-sm-2">
                            <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
@@ -68,23 +73,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                               }
                               ?>
                            </div>
-                           <form class="omb_loginForm" action="<?php echo General::view_link('dang-nhap.html', true); ?>" autocomplete="off" method="POST">
+                           <form class="omb_loginForm"
+                              action="<?php echo General::view_link('dang-nhap.html', true); ?>" autocomplete="off"
+                              method="POST">
                               <div class="input-group">
                                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                  <input type="text" class="form-control" name="customer_email" placeholder="Nhập email">
                               </div>
-                              <span class="help-block"></span>
 
                               <div class="input-group">
                                  <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                 <input type="password" class="form-control" name="customer_password" placeholder="Nhập mật khẩu">
+                                 <input type="password" class="form-control" name="customer_password"
+                                    placeholder="Nhập mật khẩu">
                               </div>
-                              <span class="help-block">Password error</span>
 
-                              <button class="btn btn-lg btn-basic btn-block" type="submit">Login</button>
+                              <button class="btn btn-lg btn-basic btn-block" type="submit"
+                                 style="margin: 10px 0px">Login</button>
                            </form>
                         </div>
                      </div>
+
                      <div class="row omb_row-sm-offset-3">
                         <div class="col-xs-12 col-sm-3">
                            <label class="checkbox">
@@ -97,6 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                            </p>
                         </div>
                      </div>
+
                   </div>
                   <!-- END -->
 
@@ -107,112 +116,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    <?php Path::path_file_include('Script_resource') ?>
 
    <script src="<?php echo Path::path_file("Assets_js_jquery.validate") ?>"></script>
-   <?php Path::path_file_include('Ckeditor_replace') ?>
 
    <script>
-      General.insert_head("<?php echo Path::path_file('Assets_css_style -custom') ?>", 1);
+   General.insert_head("<?php echo Path::path_file('Assets_css_style-custom') ?>", 1);
 
-      function CKupdate() {
-         for (instance in CKEDITOR.instances) {
-            CKEDITOR.instances[instance].updateElement();
-            CKEDITOR.instances[instance].setData('');
-         }
-      }
-      $("form.contact_form").validate({
-         ignore: [],
-         rules: {
-            contact_name: {
-               required: true,
-               minlength: 6
-            },
-            contact_email: {
-               required: true,
-               email: true,
-            },
-            contact_subject: {
-               required: true
-            },
-            contact_message: {
-               required: function(textarea) {
-                  CKEDITOR.instances[textarea.id].updateElement();
-                  var editorcontent = textarea.value.replace(/<[^>]*>/gi, '');
-                  return editorcontent.length === 0;
-               }
-            },
-         },
-         messages: {
-            contact_name: {
-               required: "Tên người liên hệ không được để trống",
-               minlength: 6
-            },
-            contact_email: {
-               required: "Email người liên hệ không được để trống",
-               email: "Email không được để trống",
-            },
-            contact_subject: {
-               required: "Tiêu đề mail không được để trống",
-            },
-            contact_message: {
-               required: "Nội dung mail không được để trống",
-            },
-         },
-         errorPlacement: function(error, element) {
-            // if (element.is(":radio"))
-            //    error.insertAfter(element.parent("label").next());
-            // else if (element.is(":checkbox"))
-            //    error.insertAfter(element.next());
-            // else
-            error.insertBefore(element);
-         },
-         submitHandler: function(form) {
-            let url_link =
-               "<?php echo Content::put_content('User_contact', 'Contact', 'exeContact', 'gui-tin-lien-he.php', 'query') ?>";
-            let data = new FormData($("form.contact_form")[0]);
-            var get_content = $("div.contact_us").html();
-            $.ajax({
-               data: data,
-               url: url_link,
-               type: "POST",
-               dataType: 'json',
-               processData: false,
-               contentType: false,
-               beforeSend: function() {
-                  //Tiến hành ẩn đi form và hiện nội dung thông báo
-                  $('div.contact_us').hide();
-                  $('div.hide_content').show();
-                  $('div.hide_content').html(
-                     `<h4 class="wow fadeInRightBig" style="font-style: italic;"> Đang tiến hành gửi mail ... </h4>`
-                  );
-               },
-               success: function(data) {
-                  if (!data) {
-                     $('div.hide_content').html(
-                        `<h1 class="wow fadeInRightBig" style="color:red;font-weight: bold;"> Gửi mail thất bại</h1>
-                     <button class="btn btn-lg btn-danger" id="Submit_Button">Quay Lại</button>`
-                     );
-                  } else {
-                     $('div.hide_content').html(
-                        `<h1 class="wow fadeInRightBig" style="color:green;font-weight: bold;"> Gửi mail thành công</h1>
-                     <button class="btn btn-lg btn-success" id="Submit_Button">Quay Lại</button>`
-                     );
-                  }
+   $.validator.addMethod("regex", function(value, element, regexp) {
+      var re = new RegExp(regexp);
+      return this.optional(element) || re.test(value);
+   }, "Please check your input.");
 
-                  //Bắt sự kiện click button quay lại khi đăng ký thất bại hoặc thành công
-                  $(document).on('click', 'button#Submit_Button', function() {
-                     $('form.contact_form').trigger("reset");
-                     CKupdate();
-                     //Tiến hành hiện form và xóa đi nội dung thông báo
-                     $('div.hide_content').empty();
-                     $('div.contact_us').show();
-                  })
-
-               }, // END success
-               error: function(data) {
-                  console.log('Error:', data);
-               } // END error
-            }); // END ajax
-         }
-      })
+   $("form.omb_loginForm").validate({
+      ignore: [],
+      rules: {
+         customer_email: {
+            required: true,
+            email: true,
+         },
+         // customer_password: {
+         //    required: true,
+         //    regex: "^(((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])))(?=.{6,})",
+         // }
+      },
+      messages: {
+         customer_email: {
+            required: "Email không được để trống",
+            email: "Email không hợp lệ"
+         },
+         // customer_password: {
+         //    required: "Mật khẩu không được để trống",
+         //    regex: "Mức độ mật khẩu chưa tốt"
+         // }
+      },
+      errorPlacement: function(error, element) {
+         error.insertBefore(element.parent("div.input-group").next());
+      },
+   })
    </script>
 
 </body>
